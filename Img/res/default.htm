@@ -1,0 +1,127 @@
+<html>
+<head>
+<title>Sciter clock</title>
+<style>
+	html  { background:transparent; } 
+
+	*
+	{
+		padding: 0;
+		margin: 0;
+	}
+	body  
+	{
+		background-image: url("backgrounds.jpg");
+        background-repeat : no-repeat;
+		margin: 0;
+		padding: 0;
+		width: 641px;
+		height: 391px;
+	}
+	
+    #closeicon
+    {
+    	background-image: url("close_1.png");
+    	float: right;
+    	height: 22px;
+    	width: 22px;
+    	border: none;
+    	overflow: hidden;
+    }
+
+    #closeicon:hover
+    {
+    	cursor: pointer;
+        background-image: url("close_2.png");
+    //	background-position: 0px 0px;
+    }
+	
+	.content
+	{
+		padding : 30px;
+	}
+	
+	.row
+	{
+		margin-top : 10px;
+	}
+	
+	input
+	{
+		height : 25px;
+		width : 250px;
+		border : none;
+		border-radius : 5px;
+        padding-left : 5px;
+	}
+	
+	#check
+	{
+		background-image : none;
+		border : 1px solid black;
+		border-radius : 5px;
+		width : 100px;
+		padding : 8px;
+	}
+	
+	#check:hover
+	{
+		background-color : blue;
+		cursor : pointer;
+	}
+	
+
+</style>
+<script type="text/tiscript">
+     
+	include "moveable-view.tis";
+
+	const body = $(body);
+
+	self.ready = function() // html loaded - DOM ready
+	{
+		view.caption = "Sciter Clock";
+
+		// positioning the window in the middle of the screen:
+		var (sx,sy,sw,sh) = view.screenBox(#workarea,#rectw); // gettting screen/monitor size
+		var (w,h) = self.$(body).box(#dimension); 
+
+		view.move(sx + (sw - w) / 2, sy + (sh - h) / 2, w, h);
+	}
+
+    $(#closeicon).on("click",function()
+	{
+		view.close();
+	});
+
+	// setup movable window handler:
+	movableView();
+
+</script>
+
+</head>
+<body>
+	<header>
+        <button id = "closeicon"><!-- <img src = "CloseButton_MainDlg.bmp"> --></button>
+	</header>
+
+    <div class = "content">
+		<div class = "row">
+			Image1 : <input type = "text" id ="image1">
+		</div>
+		
+		<div class = "row">
+			Image2 : <input type = "text" id ="image2">
+		</div>
+		
+		<div class = "row">
+			<button id = "check">Check</button>
+		</div>
+		
+		<div class = "row">
+			Result : 
+			<span id = "result"></span>
+		</div>
+	</div>
+</body>
+</html>
